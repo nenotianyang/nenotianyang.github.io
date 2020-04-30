@@ -6,21 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/4 | 李朋博的博客</title>
+  <title>Java Web基础知识6 | 李朋博的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="中国地质大学长城学院2016级本科毕业生，自学了Java、JavaWeb、Html、CSS、JavaScript、SSM三大框架、SpringBoot、Shiro等基础知识">
-<meta property="og:type" content="website">
-<meta property="og:title" content="李朋博的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2020/04/index.html">
+  <meta name="description" content="JavaBean如何使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web基础知识6">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866/index.html">
 <meta property="og:site_name" content="李朋博的博客">
-<meta property="og:description" content="中国地质大学长城学院2016级本科毕业生，自学了Java、JavaWeb、Html、CSS、JavaScript、SSM三大框架、SpringBoot、Shiro等基础知识">
+<meta property="og:description" content="JavaBean如何使用">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C16.png">
+<meta property="og:image" content="c:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C17.png">
+<meta property="article:published_time" content="2020-04-30T13:36:41.000Z">
+<meta property="article:modified_time" content="2020-04-30T15:58:52.121Z">
 <meta property="article:author" content="李朋博">
-<meta property="article:tag" content="后端">
-<meta property="article:tag" content="jquery">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="ava、JavaWeb、Html、CSS、JavaScript、SSM三大框架、SpringBoot、Shiro">
+<meta property="article:tag" content="JavaBean">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C16.png">
   
     <link rel="alternative" href="/atom.xml" title="李朋博的博客" type="application/atom+xml">
   
@@ -148,264 +150,139 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java-Web基础知识6" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java Web基础知识6
+    </h1>
+  
+
+        
+        <a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866/" class="archive-article-date">
+  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> JavaBean如何使用</p>
+<a id="more"></a>
+
+<h2 id="9、-JavaBean"><a href="#9、-JavaBean" class="headerlink" title="9、 JavaBean"></a>9、 JavaBean</h2><p>实体类</p>
+<p>JavaBean有特定的写法</p>
+<ul>
+<li>必须要有一个无惨构造</li>
+<li>属性必须私有化</li>
+<li>必须有对应的get/set方法</li>
+</ul>
+<p>一般用来和数据库的字段做映射 ORM</p>
+<p>ORM：对象关系映射</p>
+<ul>
+<li>表—&gt;类</li>
+<li>字段—&gt;属性</li>
+<li>行记录—&gt;对象</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+<th>address</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>桐人</td>
+<td>22</td>
+<td>日本</td>
+</tr>
+<tr>
+<td>2</td>
+<td>亚丝娜</td>
+<td>23</td>
+<td>日本</td>
+</tr>
+<tr>
+<td>3</td>
+<td>爱丽丝</td>
+<td>24</td>
+<td>日本</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">new</span> People(<span class="number">1</span>,<span class="string">"桐人"</span>,<span class="number">22</span>,<span class="string">"日本"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>过滤器</li>
+<li>文件上传</li>
+<li>邮件发送</li>
+<li>JDBC复习：如何使用JDBC，JDBC crud,jdbc 事务</li>
+</ul>
+<h2 id="10、MVC三层架构"><a href="#10、MVC三层架构" class="headerlink" title="10、MVC三层架构"></a>10、MVC三层架构</h2><p>什么是MVC：MOdel    view    Controller 模型、视图、控制器</p>
+<h3 id="10-1-远古架构"><a href="#10-1-远古架构" class="headerlink" title="10.1 远古架构"></a>10.1 远古架构</h3><p><img src="C:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C16.png" alt=""></p>
+<p>用户直接访问控制层，控制层可以直接操作数据库</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">servlet--CRUD--&gt;数据库</span><br><span class="line">弊端：程序臃肿不利于维护		</span><br><span class="line">servlet的代码中：处理请求、响应、视图跳转、处理JDBC、处理业务代码、处理逻辑代码</span><br><span class="line">    </span><br><span class="line">架构：没有什么是加一层解决不了的</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-2-MVC三层架构"><a href="#10-2-MVC三层架构" class="headerlink" title="10.2 MVC三层架构"></a>10.2 MVC三层架构</h3><p><img src="C:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C17.png" alt=""></p>
+<p>Model：</p>
+<ul>
+<li>业务处理：业务逻辑（Service）</li>
+<li>数据持久层：CRUD（Dao）</li>
+</ul>
+<p>View：</p>
+<ul>
+<li>展示数据</li>
+<li>提供链接发起Servlet请求（a，form，img….）</li>
+</ul>
+<p>Controller（Servlet）：</p>
+<ul>
+<li>接受用户的请求：（（req：请求参数）、Session的信息）</li>
+<li>交给业务层处理响应的代码</li>
+<li>控制视图的跳转</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">登录---&gt;接受用户的登录请求---&gt;处理用户的请求（获取用户登录的参数，username，password）---&gt;交给业务层处理登录业务（判断用户名密码是否正确：事务）---&gt;Dao层查询用户名和密码是否正确---&gt;数据库</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢爸爸<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/" class="archive-article-date">
-  	<time datetime="2020-04-30T15:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/">Java-Web基础知识2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tomcat，HTTP响应体</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java Web基础知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%864/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%864/">Java Web基础知识4</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Servlet</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%865/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%865/">Java Web基础知识5</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JSP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%863/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%863/">Java Web基础知识3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867/">Java Web基础知识7</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Filter，JDBC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866/">Java Web基础知识6</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -417,19 +294,110 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java Web基础知识7
+        
+      </div>
+    </a>
   
   
-    </div></section>
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -452,8 +420,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

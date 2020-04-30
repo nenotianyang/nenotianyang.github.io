@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/4 | 李朋博的博客</title>
+  <title>Java Web基础知识7 | 李朋博的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="中国地质大学长城学院2016级本科毕业生，自学了Java、JavaWeb、Html、CSS、JavaScript、SSM三大框架、SpringBoot、Shiro等基础知识">
-<meta property="og:type" content="website">
-<meta property="og:title" content="李朋博的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2020/04/index.html">
+  <meta name="description" content="Filter与监听器和JDBC事物的讲解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web基础知识7">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867/index.html">
 <meta property="og:site_name" content="李朋博的博客">
-<meta property="og:description" content="中国地质大学长城学院2016级本科毕业生，自学了Java、JavaWeb、Html、CSS、JavaScript、SSM三大框架、SpringBoot、Shiro等基础知识">
+<meta property="og:description" content="Filter与监听器和JDBC事物的讲解">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C18.png">
+<meta property="og:image" content="c:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C19.png">
+<meta property="og:image" content="c:/Users/50593/Desktop/Typora/JavaWeb/20.png">
+<meta property="article:published_time" content="2020-04-30T13:36:41.000Z">
+<meta property="article:modified_time" content="2020-04-30T15:58:58.867Z">
 <meta property="article:author" content="李朋博">
-<meta property="article:tag" content="后端">
-<meta property="article:tag" content="jquery">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="ava、JavaWeb、Html、CSS、JavaScript、SSM三大框架、SpringBoot、Shiro">
+<meta property="article:tag" content="Filter，JDBC">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C18.png">
   
     <link rel="alternative" href="/atom.xml" title="李朋博的博客" type="application/atom+xml">
   
@@ -148,226 +151,150 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java-Web基础知识7" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java Web基础知识7
+    </h1>
+  
+
+        
+        <a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867/" class="archive-article-date">
+  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  Filter与监听器和JDBC事物的讲解</p>
+<a id="more"></a>
+
+<h2 id="11、Filter"><a href="#11、Filter" class="headerlink" title="11、Filter"></a>11、Filter</h2><p>Filter:过滤器，用来过滤网站的数据</p>
+<ul>
+<li>处理中文乱码</li>
+<li>登录验证…</li>
+</ul>
+<p><img src="C:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C18.png" alt=""></p>
+<p>Filter开发步骤：</p>
+<ol>
+<li><p>导包</p>
+</li>
+<li><p>编写过滤器</p>
+<ol>
+<li><p>导包不要错<img src="C:%5CUsers%5C50593%5CDesktop%5CTypora%5CJavaWeb%5C19.png" alt=""></p>
+</li>
+<li><p>实现Filter接口，重写相应的方法即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CharaterEncodingFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"CharaterEncodingFilter初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//filterChain:链</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        1.过滤中的所有代码，在过滤特定请求的时候都会执行</span></span><br><span class="line"><span class="comment">        2.必须要让过滤器继续同行</span></span><br><span class="line"><span class="comment">            doFilter(servletRequest,servletResponse)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        servletRequest.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        servletResponse.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        servletResponse.setContentType(<span class="string">"text/html;charset=UTF-8"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"CharaterEncodingFilter执行前"</span>);</span><br><span class="line">        filterChain.doFilter(servletRequest,servletResponse);<span class="comment">//让我们的请求继续走，如果不写，程序到这里就被拦截停止</span></span><br><span class="line">        System.out.println(<span class="string">"CharaterEncodingFilter执行后"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//销毁:web服务器关闭的时候，过滤器会销毁</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"CharaterEncodingFilter销毁"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在web.xml中配置Filter</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.krito.filter.CharaterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--只要是/servlet的任何请求都会经过这个过滤器--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="12、监听器"><a href="#12、监听器" class="headerlink" title="12、监听器"></a>12、监听器</h2><p>实现一个监听器的接口（有N种）</p>
+<ol>
+<li><p>编写一个监听器</p>
+</li>
+<li><p>实现监听器的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//统计网络在线人数：统计Session</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnlineCountListener</span> <span class="keyword">implements</span> <span class="title">HttpSessionListener</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建Session的监听：看你的一举一动</span></span><br><span class="line">    <span class="comment">//一旦创建一个Session就会触发一次事件</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionCreated</span><span class="params">(HttpSessionEvent se)</span> </span>&#123;</span><br><span class="line">        ServletContext ctx = se.getSession().getServletContext();</span><br><span class="line">        Integer onlineCount = (Integer)ctx.getAttribute(<span class="string">"OnlineCount"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(onlineCount==<span class="keyword">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            onlineCount = <span class="keyword">new</span> Integer(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> count = onlineCount.intValue();</span><br><span class="line">            onlineCount = <span class="keyword">new</span> Integer(count+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ctx.setAttribute(<span class="string">"OnlineCount"</span>,onlineCount);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//销毁Session的监听</span></span><br><span class="line">    <span class="comment">//一旦销毁Session就会触发一次事件</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionDestroyed</span><span class="params">(HttpSessionEvent se)</span> </span>&#123;</span><br><span class="line">        ServletContext ctx = se.getSession().getServletContext();</span><br><span class="line">        Integer onlineCount = (Integer)ctx.getAttribute(<span class="string">"OnlineCount"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(onlineCount==<span class="keyword">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            onlineCount = <span class="keyword">new</span> Integer(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> count = onlineCount.intValue();</span><br><span class="line">            onlineCount = <span class="keyword">new</span> Integer(count-<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ctx.setAttribute(<span class="string">"OnlineCount"</span>,onlineCount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    Session销毁:</span></span><br><span class="line"><span class="comment">    1.手动销毁 getSession().invalidate();</span></span><br><span class="line"><span class="comment">    2.自动销毁 </span></span><br><span class="line"><span class="comment">    	&lt;session-config&gt;</span></span><br><span class="line"><span class="comment">        &lt;session-timeout&gt;1&lt;/session-timeout&gt;</span></span><br><span class="line"><span class="comment">    	&lt;/session-config&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>web.xml注册监听器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--注册监听器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>com.krito.listener.OnlineCountListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>看情况是否使用</p>
+</li>
+</ol>
+<h2 id="13、过滤器、监听器常见应用"><a href="#13、过滤器、监听器常见应用" class="headerlink" title="13、过滤器、监听器常见应用"></a>13、过滤器、监听器常见应用</h2><p><strong>监听器：GUI（图形界面编程）编程中经常使用</strong></p>
+<p>用户登录之后才能进入主页，用户 注销之后就不能进入主页。</p>
+<ol>
+<li><p>用户登录之后向Session中放入用户的数据</p>
+</li>
+<li><p>进入主页的时候要判断用户是否已经登陆；要求：在过滤器中实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HttpServletRequest request = (HttpServletRequest) req;</span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) resp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(request.getSession().getAttribute(<span class="string">"USER_SESSION"</span>)==<span class="keyword">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            response.sendRedirect(<span class="string">"/error.jsp"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        filterChain.doFilter(req,resp);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="14、JDBC"><a href="#14、JDBC" class="headerlink" title="14、JDBC"></a>14、JDBC</h2><p>什么是JDBC：Java连接数据库</p>
+<img src="C:\Users\50593\Desktop\Typora\JavaWeb\20.png" style="zoom:80%;" />
+
+<p>需要jar包的支持：</p>
+<ul>
+<li>java.sql</li>
+<li>javax.sql</li>
+<li>mysql-connecter-java..连接驱动（必须导入）</li>
+</ul>
+<p>1.数据写入数据库</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span>(</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">40</span>),</span><br><span class="line">    <span class="string">`PASSWORD`</span> <span class="built_in">varchar</span>(<span class="number">40</span>),</span><br><span class="line">    email <span class="built_in">VARCHAR</span>(<span class="number">60</span>)</span><br><span class="line">    birthday <span class="built_in">DATE</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">users</span>(<span class="keyword">id</span>,<span class="string">`name`</span>,<span class="string">`password`</span>,email,birthday)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">1</span>,<span class="string">'1'</span>,<span class="string">'1'</span>,<span class="string">'1@qq.com'</span>,<span class="string">'2000-01-01'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">users</span>(<span class="keyword">id</span>,<span class="string">`name`</span>,<span class="string">`password`</span>,email,birthday)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">2</span>,<span class="string">'2'</span>,<span class="string">'2'</span>,<span class="string">'2@qq.com'</span>,<span class="string">'2000-02-02'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">users</span>(<span class="keyword">id</span>,<span class="string">`name`</span>,<span class="string">`password`</span>,email,birthday)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">3</span>,<span class="string">'3'</span>,<span class="string">'3'</span>,<span class="string">'3@qq.com'</span>,<span class="string">'2000-03-03'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">users</span>;</span><br></pre></td></tr></table></figure>
+
+<p>2.导入数据库依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--mysql的驱动--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.47<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3.IDEA中连接数据库</p>
+<p><strong>4.JDBC固定步骤</strong></p>
+<ol>
+<li>加载驱动</li>
+<li>连接数据库，代表数据库</li>
+<li>向数据库发送SQL的对象Statement:CRUD</li>
+<li>编写SQL（根据业务，不同的SQL）</li>
+<li>执行SQL</li>
+<li>关闭连接</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, SQLException </span>&#123;</span><br><span class="line">        <span class="comment">//配置信息</span></span><br><span class="line">        <span class="comment">//useUnicode=true&amp;characterEncoding=UTF-8 解决中文乱码</span></span><br><span class="line">        String url = <span class="string">"jdbc:mysql://localhost:3306/test?user=root&amp;password=&amp;useUnicode=true&amp;characterEncoding=UTF-8"</span>;</span><br><span class="line">        String username = <span class="string">"root"</span>;</span><br><span class="line">        String password = <span class="string">"password"</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//1.加载驱动</span></span><br><span class="line">        Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        <span class="comment">//2.连接数据库，代表数据库</span></span><br><span class="line">        Connection connection = DriverManager.getConnection(url,username,password)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//3.向数据库发送SQL的对象Statement： CRUD</span></span><br><span class="line">        Statement statement = connection.createStatement();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//4.编写SQL</span></span><br><span class="line">        String sql = <span class="string">"select * from users"</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//5.执行查询SQL，返回一个ResultSet：结果集</span></span><br><span class="line">        ResultSet rs = statement.executeQuery(sql);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(rs.next())</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(<span class="string">"id="</span>+rs.getObject(<span class="string">"id"</span>));</span><br><span class="line">            System.out.println(<span class="string">"name="</span>+rs.getObject(<span class="string">"name"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//6.关闭连接：释放资源（一定要做）先开后关</span></span><br><span class="line">        rs.close();</span><br><span class="line">        statement.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//增删改都用executeUpdate即可</span></span><br></pre></td></tr></table></figure>
+
+<p>预编译SQL</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, SQLException </span>&#123;</span><br><span class="line">        <span class="comment">//配置信息</span></span><br><span class="line">        <span class="comment">//useUnicode=true&amp;characterEncoding=UTF-8 解决中文乱码</span></span><br><span class="line">        String url = <span class="string">"jdbc:mysql://localhost:3306/test?user=root&amp;password=&amp;useUnicode=true&amp;characterEncoding=UTF-8"</span>;</span><br><span class="line">        String username = <span class="string">"root"</span>;</span><br><span class="line">        String password = <span class="string">"password"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.加载驱动</span></span><br><span class="line">        Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        <span class="comment">//2.连接数据库，代表数据库</span></span><br><span class="line">        Connection connection = DriverManager.getConnection(url,username,password);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.编写SQL</span></span><br><span class="line">        String sql = <span class="string">"insert into users(id,name,password,email,birthday) values (?,?,?,?,?)"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//预编译</span></span><br><span class="line">        PreparedStatement preparedStatement = connection.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line">        preparedStatement.setInt(<span class="number">1</span>,<span class="number">4</span>);<span class="comment">//给第一个占位符？赋值为1</span></span><br><span class="line">        preparedStatement.setString(<span class="number">2</span>,<span class="string">"Krito"</span>);<span class="comment">//给第二个占位符？赋值为Krito</span></span><br><span class="line">        preparedStatement.setString(<span class="number">3</span>,<span class="string">"123456"</span>);</span><br><span class="line">        preparedStatement.setString(<span class="number">4</span>,<span class="string">"krito@qq.com"</span>);</span><br><span class="line">        preparedStatement.setDate(<span class="number">5</span>,<span class="keyword">new</span> Date(<span class="keyword">new</span> java.util.Date().getTime()));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5.执行SQL</span></span><br><span class="line">        <span class="keyword">int</span> i = preparedStatement.executeUpdate();</span><br><span class="line">        <span class="keyword">if</span>(i&lt;<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(<span class="string">"输入成功"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//6.关闭连接：释放资源（一定要做）先开后关</span></span><br><span class="line">        preparedStatement.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>事务</p>
+<p>要么都成功，要么都失败</p>
+<p>ACID原则：保证数据的安全。</p>
+<ul>
+<li>开启事务</li>
+<li>事务提交 commit() </li>
+<li>事务回滚 rollback()</li>
+<li>关闭事务</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢爸爸<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/" class="archive-article-date">
-  	<time datetime="2020-04-30T15:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%862/">Java-Web基础知识2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tomcat，HTTP响应体</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java Web基础知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JavaWeb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%864/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%864/">Java Web基础知识4</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Servlet</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%865/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%865/">Java Web基础知识5</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JSP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%863/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%863/">Java Web基础知识3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867/">Java Web基础知识7</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -379,57 +306,115 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866/" class="archive-article-date">
-  	<time datetime="2020-04-30T13:36:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%863/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java Web基础知识3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java Web基础知识6</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Java-Web%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866/">Java Web基础知识6</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JavaBean</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -452,8 +437,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
